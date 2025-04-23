@@ -1,0 +1,8 @@
+## Interface: 11200
+## Title: AR Checker
+## Notes: Checks gear of raiders for Arcane resistance values
+## Author: Vellasta
+## Version: 0.1
+## X-Category: Raid
+
+archeck.lua
