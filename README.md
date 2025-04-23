@@ -1,8 +1,8 @@
 # AR-Checker
 Checks if raid has sufficient AR for Anomalus
 
-Commands:
+Commands:<br>
 /archeck | (AR value) | announce [optional]
 
-Example:
+Example:<br>
 /archeck 230 announce
