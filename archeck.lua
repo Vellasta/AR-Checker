@@ -5,7 +5,7 @@ ARcheck_Tooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 local gfind = string.gmatch or string.gfind
 
 do
-	SLASH_ARCHECK1 = "/archeck"
+	SLASH_ARCHECK1, SLASH_ARCHECK2 = "/archeck", "/arc"
 	SlashCmdList["ARCHECK"] = function(message)
 		local commandlist = { }
 		local command
