@@ -107,39 +107,3 @@ do
 		end
 	end
 end
-
-local function StartInspecting(unitID)
-	local name = UnitName(unitID);
-
-	if (name ~= inspectedPlayerName) then -- changed target, clear currently inspected player
-		ClearInspectPlayer();
-		inspectedPlayerName = nil;
-	end
-	if (name == nil
-		or name == inspectedPlayerName
-		or not UnitIsPlayer(unitID)
-		--or not UnitIsFriend("player", unitID)  -- all grouped players are Alliance on turtle so this will record enemy players data
-		or eFaction[UnitRace(unitID)] -- check if players race is of other faciton
-		or not CheckInteractDistance(unitID, 1)
-		or not CanInspect(unitID)) then
-		return
-	end
-	
-	local player = HonorSpy.db.realm.hs.currentStandings[name] or inspectedPlayers[name]; --need to check for faction
-	if (player == nil) then
-		inspectedPlayers[name] = {last_checked = 0};
-		player = inspectedPlayers[name];
-	end
-	if (time() - player.last_checked < 30) then -- 30 seconds until new inspection request
-		return
-	end
-	-- we gonna inspect new player, clear old one
-	ClearInspectPlayer();
-	inspectedPlayerName = name;
-	player.unitID = unitID;
-	NotifyInspect(unitID);
-	RequestInspectHonorData();
-	_, player.rank = GetPVPRankInfo(UnitPVPRank(player.unitID)); -- rank must be get asap while mouse is still over a unit
-	_, player.class = UnitClass(player.unitID); -- same
-	_, player.race = UnitRace(player.unitID); -- same
-end
